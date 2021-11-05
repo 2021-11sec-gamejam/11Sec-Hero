@@ -1,17 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    public PlayerModel model;
     public float speed = 1f;
 
     private void Update()
     {
-        transform.Translate(GetInput() * (Time.deltaTime * speed));
+        switch (model.state)
+        {
+            case PlayerModel.PlayerState.Idle:
+                var input = GetMovingInput();
+                if (input != Vector2.zero)
+                {
+                    transform.Translate(input * (Time.deltaTime * speed));
+                    model.state = PlayerModel.PlayerState.Walk;
+                }
+                break;
+            case PlayerModel.PlayerState.Walk:
+                input = GetMovingInput();
+                if (input != Vector2.zero)
+                {
+                    transform.Translate(input * (Time.deltaTime * speed));
+                }
+                else
+                {
+                    model.state = PlayerModel.PlayerState.Idle;
+                }
+                break;
+            case PlayerModel.PlayerState.Attack:
+                break;
+            case PlayerModel.PlayerState.Death:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
-    private static Vector2 GetInput()
+    private static Vector2 GetMovingInput()
     {
         var x = 0f;
         x += Input.GetKey(KeyCode.A) ? -1 : 0;

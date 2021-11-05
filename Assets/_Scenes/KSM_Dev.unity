@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 2045062535}
   - component: {fileID: 2045062534}
   - component: {fileID: 2045062533}
+  - component: {fileID: 2045062536}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -236,6 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8d3a9d58db0ea49b95823cd9b3d7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 2045062536}
+  speed: 1
 --- !u!212 &2045062534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -301,3 +304,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2045062536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045062532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ad4e62a81e84500aa78b51a3dcf8736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
