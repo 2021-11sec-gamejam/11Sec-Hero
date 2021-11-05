@@ -50,6 +50,9 @@ public class CharacterController : MonoBehaviour
 
     private void GetAttackInput()
     {
-        //Input.GetMouseButton(1) ? model. 
+        if (Input.GetMouseButton(1))
+        {
+            model.weapon.Attack(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
     }
 }
