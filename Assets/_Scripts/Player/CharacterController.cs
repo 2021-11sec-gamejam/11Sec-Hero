@@ -32,12 +32,8 @@ public class CharacterController : MonoBehaviour
                     model.state = PlayerModel.PlayerState.Idle;
                 }
                 break;
-            case PlayerModel.PlayerState.Attack:
-                break;
             case PlayerModel.PlayerState.Death:
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -50,5 +46,10 @@ public class CharacterController : MonoBehaviour
         y += Input.GetKey(KeyCode.W) ? 1 : 0;
         y += Input.GetKey(KeyCode.S) ? -1 : 0;
         return new Vector2(x, y);
+    }
+
+    private void GetAttackInput()
+    {
+        //Input.GetMouseButton(1) ? model. 
     }
 }
