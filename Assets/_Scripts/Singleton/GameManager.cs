@@ -8,8 +8,9 @@ namespace Singleton
     {
         public PlayerModel player;
 
-        protected void Start()
+        protected override void OnAwake()
         {
+            base.OnAwake();
             player ??= Instantiate(Resources.Load<GameObject>("Player"), Vector3.zero, Quaternion.identity).GetComponent<PlayerModel>();
         }
     }
