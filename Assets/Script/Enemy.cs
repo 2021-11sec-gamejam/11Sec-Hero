@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
         if (HP <= 0)
         {
             // Die method... TODO.
+            animator.SetBool("isDie", true);
         }
     }
 }

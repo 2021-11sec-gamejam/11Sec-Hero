@@ -4,9 +4,7 @@ using UnityEngine;
 
 
 public class Weakest : Enemy
-{
-    public float AttackValue;
-    public float HP;
+{    
 
     // Start is called before the first frame update
     void Start()

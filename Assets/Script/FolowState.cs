@@ -19,11 +19,7 @@ public class FollowState : StateMachineBehaviour
         if (Vector2.Distance(Enemy.player.transform.position, enemyTransform.position) < 1f)
         {
             animator.SetTrigger("Attack");
-        }
-        else if(weakest.HP == 0)
-        {
-            animator.SetBool("isDie", true);
-        }
+        }       
         else
         {
             enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, Enemy.player.transform.position,
