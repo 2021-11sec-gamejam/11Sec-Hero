@@ -11,6 +11,7 @@ namespace Player
         {
             Idle,
             Walk,
+            Attack,
             Death
         }
 

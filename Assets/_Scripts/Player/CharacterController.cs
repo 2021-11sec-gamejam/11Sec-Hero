@@ -20,6 +20,7 @@ public class CharacterController : MonoBehaviour
                     transform.Translate(input * (Time.deltaTime * speed));
                     model.state = PlayerModel.PlayerState.Walk;
                 }
+                GetAttackInput();
                 break;
             case PlayerModel.PlayerState.Walk:
                 input = GetMovingInput();
@@ -28,6 +29,13 @@ public class CharacterController : MonoBehaviour
                     transform.Translate(input * (Time.deltaTime * speed));
                 }
                 else
+                {
+                    model.state = PlayerModel.PlayerState.Idle;
+                }
+                GetAttackInput();
+                break;
+            case PlayerModel.PlayerState.Attack:
+                if (!model.weapon.model.isAttacking)
                 {
                     model.state = PlayerModel.PlayerState.Idle;
                 }
@@ -50,9 +58,9 @@ public class CharacterController : MonoBehaviour
 
     private void GetAttackInput()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
-            model.weapon.Attack(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            model.weapon.Attack();
         }
     }
 }
