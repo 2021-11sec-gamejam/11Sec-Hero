@@ -1,4 +1,5 @@
 ﻿using System;
+using Factory;
 using UnityEngine;
 
 namespace Player
@@ -26,6 +27,13 @@ namespace Player
         public Weapon weapon;
 
         private float _remainTime;
+
+        public void Awake()
+        {
+            var model = WeaponFactory.Instance.GetBasicWeapon();
+            weapon = gameObject.AddComponent<Sword>();
+            weapon.model = model;
+        }
 
         private void Update()
         {
