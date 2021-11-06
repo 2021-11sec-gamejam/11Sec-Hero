@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     {
         player ??= GameManager.Instance.player;
         animator = GetComponent<Animator>();
-        speed = 3f;
+        speed = 1f;
     }
 
     public void DirectionEnemy(float target, float baseobj)
@@ -27,13 +27,13 @@ public class Enemy : MonoBehaviour
         {
             //왼쪽
             animator.SetFloat("Direction", -1f);                   
-            transform.localScale = new Vector3(-3f, 3f, 1f);
+            transform.localScale = new Vector3(3f, 3f, 1f);
         }
         else 
         {
             //왼쪽
             animator.SetFloat("Direction", 1f);            
-            transform.localScale = new Vector3(3f, 3f, 1f);            
+            transform.localScale = new Vector3(-3f, 3f, 1f);            
         }
     }
 
