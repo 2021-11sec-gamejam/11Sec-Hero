@@ -11,7 +11,7 @@ namespace Weapon
             if (!model.isAttacking)
             {
                 model.isAttacking = true;
-                var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                var mousePos = MainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 var movePos = transform.position + mousePos.normalized * model.dashWeight;
                 movePos.z = transform.position.z;
                 _attackSequence = DOTween.Sequence()
