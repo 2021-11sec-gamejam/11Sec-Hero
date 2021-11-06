@@ -1,0 +1,11 @@
+M_ID,S_ID,rarity,name,Attack_Value,Attack_Speed
+0,0,0,Entry_Sword,8,0.7
+0,1,0,Iron_Sword,10,0.7
+0,2,1,Hero_Sword,12,0.5
+0,3,2,Dragon_Slayer,15,0.2
+1,0,0,Hand_Axe,10,1.5
+1,1,1,War_Axe,15,1.3
+1,2,2,Black_Cleaver,20,1
+2,0,0,Baseball_Bat,10,1
+2,1,1,Mace,12,0.8
+2,2,2,Meat_Grinder,15,0.6
