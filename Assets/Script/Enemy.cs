@@ -1,37 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
+using Singleton;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform player;    
+    public static PlayerModel player;  
     public float speed;
     private Animator animator;
     private SpriteRenderer enemySprite;    
+    
+    public float HP;
+    public float AttackValue;
 
     private void Start()
     {
+        player ??= GameManager.Instance.player;
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         speed = 3f;
-      
     }
 
     public void DirectionEnemy(float target, float baseobj)
     {
         if (target < baseobj)
         {
-            //¿ÞÂÊ
+            //ì™¼ìª½
             animator.SetFloat("Direction", -1f);                   
             transform.localScale = new Vector3(-3f, 3f, 1f);
         }
         else 
         {
-            //¿ÞÂÊ
+            //ì™¼ìª½
             animator.SetFloat("Direction", 1f);            
             transform.localScale = new Vector3(3f, 3f, 1f);            
         }
-    }    
+    }
 
-    
+    public virtual void ReceiveDamage(int damage)
+    {
+        HP -= damage;
+        if (HP <= 0)
+        {
+            // Die method... TODO.
+        }
+    }
 }

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WariersSoul : MonoBehaviour
+
+public class Weakest : Enemy
 {
-    public float HP;
     public float AttackValue;
+    public float HP;
 
     // Start is called before the first frame update
     void Start()
     {
-        HP = 20;
-        AttackValue = 2;
+        HP = 10;
+        AttackValue = 1;
     }
 
     // Update is called once per frame

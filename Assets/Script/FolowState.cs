@@ -8,15 +8,15 @@ public class FollowState : StateMachineBehaviour
     Enemy enemy;
     Weakest weakest;
 
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
         enemyTransform = animator.GetComponent<Transform>();
     }
 
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Vector2.Distance(enemy.player.position, enemyTransform.position) < 1f)
+        if (Vector2.Distance(Enemy.player.transform.position, enemyTransform.position) < 1f)
         {
             animator.SetTrigger("Attack");
         }
@@ -24,18 +24,16 @@ public class FollowState : StateMachineBehaviour
         {
             animator.SetBool("isDie", true);
         }
-        else 
+        else
         {
-            enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, enemy.player.position, Time.deltaTime * enemy.speed);
+            enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, Enemy.player.transform.position,
+                Time.deltaTime * enemy.speed);
         }
-        enemy.DirectionEnemy(enemy.player.position.x, enemyTransform.position.x);
-
+        enemy.DirectionEnemy(Enemy.player.transform.position.x, enemyTransform.position.x);
     }
 
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
     }
-
-
 }
