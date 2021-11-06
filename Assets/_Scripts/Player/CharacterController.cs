@@ -8,6 +8,13 @@ namespace Player
         public PlayerModel model;
         public float speed = 1f;
 
+        private SpriteRenderer _spriteRenderer;
+
+        private void Awake()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
         private void Update()
         {
             switch (model.state)
@@ -17,6 +24,10 @@ namespace Player
                     if (input != Vector2.zero)
                     {
                         transform.Translate(input * (Time.deltaTime * speed));
+                        if (input.x > 0)
+                        {
+                            _spriteRenderer.flipX = true;
+                        }
                         model.state = PlayerModel.PlayerState.Walk;
                     }
                     GetAttackInput();
@@ -26,6 +37,10 @@ namespace Player
                     if (input != Vector2.zero)
                     {
                         transform.Translate(input * (Time.deltaTime * speed));
+                        if (input.x != 0)
+                        {
+                            _spriteRenderer.flipX = input.x > 0;
+                        }
                     }
                     else
                     {
