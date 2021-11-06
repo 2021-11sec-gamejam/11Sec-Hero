@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Singleton;
 using UnityEngine;
 
 public class BGScroller : MonoBehaviour
 {
-    private MeshRenderer render;
-
-    public float speed;
-    private float offset;
+    private Transform _playerTransform;
+    private Tween _currentTween;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        render = GetComponent<MeshRenderer>();
+        _playerTransform = GameManager.Instance.player.transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        offset += Time.deltaTime* speed;
-        render.material.mainTextureOffset = new Vector2(0, offset);
+        var distance = Vector2.Distance(transform.position, _playerTransform.position);
+        if (distance > 50f && _currentTween == null)
+        {
+            _currentTween = transform.DOMove(_playerTransform.position, 1f).OnComplete(() => _currentTween = null);
+        }
     }
 }
