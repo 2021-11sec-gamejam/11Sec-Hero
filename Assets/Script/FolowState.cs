@@ -6,7 +6,10 @@ public class FollowState : StateMachineBehaviour
 {
     Transform enemyTransform;
     Enemy enemy;
-    Weakest weakest;
+    Monster1 monster1;
+    //Monster2 monster2;
+    Monster3 monster3;
+    Monster4 monster4;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

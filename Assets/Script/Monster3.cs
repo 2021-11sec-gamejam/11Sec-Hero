@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WariersSoul : Enemy
+public class Monster3 : Enemy
 {
     // Start is called before the first frame update
     void Start()
     {
-        HP = 20;
-        AttackValue = 2;
+        HP = 40f;
+        AttackValue = 2f;
+        speed = 0.5f;
     }
 
     // Update is called once per frame
