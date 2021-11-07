@@ -7,9 +7,10 @@ using UnityEngine;
 namespace Factory
 {
     using Weapon;
-    
+
     public class WeaponFactory : Singleton<WeaponFactory>
     {
+        private const string BasicWeapon = "보급형 검";
         private List<Weapon.WeaponModel> _weapons;
         private const string CsvPath = "Weapon";
         
@@ -22,7 +23,7 @@ namespace Factory
 
         public Weapon.WeaponModel GetBasicWeapon()
         {
-            return _weapons.First(model => model.weaponName.Equals("Entry_Sword"));
+            return _weapons.First(model => model.weaponName.Equals(BasicWeapon));
         }
     }
 }

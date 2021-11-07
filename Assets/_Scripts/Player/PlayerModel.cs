@@ -25,14 +25,13 @@ namespace Player
         }
 
         public Weapon weapon;
+        public Animator animator;
 
         private float _remainTime;
 
         public void Awake()
         {
-            var model = WeaponFactory.Instance.GetBasicWeapon();
-            weapon = gameObject.AddComponent<Sword>();
-            weapon.model = model;
+            ChangeWeapon(WeaponFactory.Instance.GetBasicWeapon());
         }
 
         private void Update()
@@ -42,6 +41,20 @@ namespace Player
             {
                 _remainTime = 0f;
             }
+        }
+
+        public void ChangeWeapon(Weapon.WeaponModel model)
+        {
+            Destroy(weapon);
+            weapon = model.type switch
+            {
+                Weapon.WeaponType.Sword => gameObject.AddComponent<Sword>(),
+                Weapon.WeaponType.Axe => gameObject.AddComponent<Axe>(),
+                Weapon.WeaponType.Blunt => gameObject.AddComponent<Blunt>(),
+                _ => weapon
+            };
+            animator.runtimeAnimatorController =
+                Resources.Load<AnimatorOverrideController>($"Animator/{model.weaponName}");
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Weapon
 {
     public class Blunt : Weapon
     {
-        public override void Attack()
+        public override bool Attack()
         {
             throw new System.NotImplementedException();
         }

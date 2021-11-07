@@ -21,7 +21,6 @@ namespace Weapon
             public int rarity;
             public string weaponName;
             public float coolDown;
-            public float dashWeight;
             public float damageValue;
             public bool isAttacking;
         }
@@ -30,7 +29,25 @@ namespace Weapon
         
         protected Sequence _attackSequence;
 
-        public abstract void Attack();
+        public virtual bool Attack()
+        {
+            if (!model.isAttacking)
+            {
+                model.isAttacking = true;
+                var mousePos = MainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                var movePos = transform.position + mousePos.normalized * (model.rarity + 1) * 3f;
+                movePos.z = transform.position.z;
+                _attackSequence = DOTween.Sequence()
+                    .Append(transform
+                        .DOMove(movePos, model.coolDown / 2f)
+                        .SetEase(Ease.InCirc))
+                    .InsertCallback(model.coolDown, () => model.isAttacking = false);
+
+                return true; // 공격 성공
+            }
+
+            return false; // 공격 실패
+        }
 
         protected static Camera MainCam; 
 
