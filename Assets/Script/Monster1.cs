@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Weakest : Enemy
+public class Monster1 : Enemy
 {    
 
     // Start is called before the first frame update
     void Start()
     {
-        HP = 10;
-        AttackValue = 1;
+        HP = 10f;
+        AttackValue = 1f;
+        speed = 1f;
     }
 
     // Update is called once per frame
