@@ -1,5 +1,6 @@
 ﻿using System;
 using Factory;
+using Singleton;
 using UnityEngine;
 
 namespace Player
@@ -28,10 +29,12 @@ namespace Player
         public Animator animator;
 
         private float _remainTime;
+        private static readonly int Die = Animator.StringToHash("Die");
 
         public void Awake()
         {
             ChangeWeapon(WeaponFactory.Instance.GetBasicWeapon());
+            RemainTime = 11f;
         }
 
         private void Update()
@@ -40,6 +43,12 @@ namespace Player
             if (_remainTime < 0f)
             {
                 _remainTime = 0f;
+                if (state != PlayerState.Death)
+                {
+                    state = PlayerState.Death;
+                    animator.SetTrigger(Die);
+                    GameManager.Instance.GameOver();
+                }
             }
         }
 

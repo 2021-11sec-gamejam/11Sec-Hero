@@ -16,7 +16,8 @@ namespace Singleton
 
         public void GameOver()
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
+            Debug.Log("으앙쥬금");
         }
     }
 }
