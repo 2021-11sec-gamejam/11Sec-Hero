@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 313665981}
   - component: {fileID: 313665980}
   m_Layer: 0
-  m_Name: KakaoTalk_20211105_233054455
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -686,6 +686,5 @@ MonoBehaviour:
     rarity: 0
     weaponName: 
     coolDown: 1
-    dashWeight: 5
     damageValue: 0
     isAttacking: 0

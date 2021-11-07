@@ -53,6 +53,7 @@ namespace Player
                 Weapon.WeaponType.Blunt => gameObject.AddComponent<Blunt>(),
                 _ => weapon
             };
+            weapon.model = model;
             animator.runtimeAnimatorController =
                 Resources.Load<AnimatorOverrideController>($"Animator/{model.weaponName}");
         }
