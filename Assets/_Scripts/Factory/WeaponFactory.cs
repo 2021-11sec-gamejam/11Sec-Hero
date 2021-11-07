@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Module;
 using Singleton;
@@ -24,6 +25,16 @@ namespace Factory
         public Weapon.WeaponModel GetBasicWeapon()
         {
             return _weapons.First(model => model.weaponName.Equals(BasicWeapon));
+        }
+
+        public Weapon.WeaponModel GetWeaponByName(string weaponName)
+        {
+            return _weapons.First(model => model.weaponName.Equals(weaponName));
+        }
+
+        public Weapon.WeaponModel GetRandomWeaponByRarity(int rarity)
+        {
+            return _weapons.Where(model => model.rarity == rarity).OrderBy(_ => new Guid()).First();
         }
     }
 }

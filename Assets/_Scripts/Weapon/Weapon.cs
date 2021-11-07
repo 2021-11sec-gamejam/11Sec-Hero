@@ -27,8 +27,6 @@ namespace Weapon
         }
         
         public WeaponModel model;
-        
-        protected Sequence _attackSequence;
 
         public virtual bool Attack()
         {
@@ -40,7 +38,7 @@ namespace Weapon
                 var movePos = transform.position + mousePos.normalized * (model.rarity + 1) * 3f;
                 movePos.z = transform.position.z;
                 GameManager.Instance.player.GetComponent<SpriteRenderer>().flipX = transform.position.x < movePos.x;
-                _attackSequence = DOTween.Sequence()
+                DOTween.Sequence()
                     .Append(transform
                         .DOMove(movePos, model.coolDown / 2f)
                         .SetEase(Ease.InCirc))
