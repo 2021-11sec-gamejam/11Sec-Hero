@@ -12,10 +12,4 @@ public class Monster4 : Enemy
         AttackValue = 5f;
         speed = 1.5f;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

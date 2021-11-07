@@ -27,6 +27,7 @@ namespace Weapon
         }
         
         public WeaponModel model;
+        protected Vector3 _movePosition;
 
         public virtual bool Attack()
         {
@@ -35,12 +36,12 @@ namespace Weapon
                 model.isAttacking = true;
                 GameManager.Instance.player.animator.SetBool(IsAttacking, true);
                 var mousePos = MainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-                var movePos = transform.position + mousePos.normalized * (model.rarity + 1) * 3f;
-                movePos.z = transform.position.z;
-                GameManager.Instance.player.GetComponent<SpriteRenderer>().flipX = transform.position.x < movePos.x;
+                _movePosition = transform.position + mousePos.normalized * (model.rarity + 1) * 3f;
+                _movePosition.z = transform.position.z;
+                GameManager.Instance.player.GetComponent<SpriteRenderer>().flipX = transform.position.x < _movePosition.x;
                 DOTween.Sequence()
                     .Append(transform
-                        .DOMove(movePos, model.coolDown / 2f)
+                        .DOMove(_movePosition, model.coolDown / 2f)
                         .SetEase(Ease.InCirc))
                     .InsertCallback(model.coolDown, () =>
                     {

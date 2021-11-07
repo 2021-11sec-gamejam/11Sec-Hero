@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Weapon
 {
@@ -6,7 +7,18 @@ namespace Weapon
     {
         public override bool Attack()
         {
-            throw new System.NotImplementedException();
+            var result = base.Attack();
+            if (result)
+            {
+                // ReSharper disable once Unity.PreferNonAllocApi
+                Physics2D.OverlapCircleAll(_movePosition, 2f)
+                    .Select(col => col.GetComponent<Enemy>())
+                    .Where(enemy => enemy != null)
+                    .ToList()
+                    .ForEach(enemy => enemy.ReceiveDamage(model.damageValue));
+            }
+
+            return result;
         }
     }
 }

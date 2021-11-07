@@ -7,22 +7,22 @@ public class IdleState : StateMachineBehaviour
     Transform enemyTransform;
     Enemy enemy;
 
-    //»óÅÂ¿¡ ÁøÀÔ ÇÒ¶§
+    //ìƒíƒœì— ì§„ì… í• ë•Œ
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
         enemyTransform = animator.GetComponent<Transform>();
     }
 
-    //»óÅÂ°¡ ÁøÇàÁßÀÏ¶§
+    //ìƒíƒœê°€ ì§„í–‰ì¤‘ì¼ë•Œ
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //¸ó½ºÅÍ¿Í ÇÃ·¹ÀÌ¾î »çÀÌÀÇ °Å¸®°¡ 4ÀÌÇÏ¸é 
+        //ëª¬ìŠ¤í„°ì™€ í”Œë ˆì´ì–´ ì‚¬ì´ì˜ ê±°ë¦¬ê°€ 4ì´í•˜ë©´ 
         if (Vector2.Distance(enemyTransform.position, Enemy.player.transform.position) <= 4f)
             animator.SetBool("isWalk", true);
     }
 
-    //»óÅÂ°¡ ³¡³¯¶§
+    //ìƒíƒœê°€ ëë‚ ë•Œ
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 

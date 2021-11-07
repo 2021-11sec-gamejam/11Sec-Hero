@@ -8,5 +8,5 @@ public class ChangeScene : MonoBehaviour
     public void SceneChange()
     {
         SceneManager.LoadScene("KSM_Dev");
-    }    
+    }
 }

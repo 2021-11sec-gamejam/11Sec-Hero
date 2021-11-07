@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     
     public float HP;
     public float AttackValue;
+    private static readonly int IsDie = Animator.StringToHash("isDie");
+    private static readonly int Direction = Animator.StringToHash("Direction");
 
     private void Start()
     {
@@ -26,24 +28,31 @@ public class Enemy : MonoBehaviour
         if (target < baseobj)
         {
             //왼쪽
-            animator.SetFloat("Direction", -1f);                   
+            animator.SetFloat(Direction, -1f);                   
             transform.localScale = new Vector3(3f, 3f, 1f);
         }
         else 
         {
             //왼쪽
-            animator.SetFloat("Direction", 1f);            
+            animator.SetFloat(Direction, 1f);            
             transform.localScale = new Vector3(-3f, 3f, 1f);            
         }
     }
 
-    public virtual void ReceiveDamage(int damage)
+    public virtual void ReceiveDamage(float damage)
     {
         HP -= damage;
         if (HP <= 0)
         {
             // Die method... TODO.
-            animator.SetBool("isDie", true);
+            animator.SetBool(IsDie, true);
+            StartCoroutine(Dead());
         }
+    }
+
+    private IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
     }
 }
