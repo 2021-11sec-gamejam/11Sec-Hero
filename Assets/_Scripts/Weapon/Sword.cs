@@ -6,20 +6,15 @@ namespace Weapon
 {
     public class Sword : Weapon
     {
-        public override void Attack()
+        public override bool Attack()
         {
-            if (!model.isAttacking)
+            var result = base.Attack();
+            if (result)
             {
-                model.isAttacking = true;
-                var mousePos = MainCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-                var movePos = transform.position + mousePos.normalized * model.dashWeight;
-                movePos.z = transform.position.z;
-                _attackSequence = DOTween.Sequence()
-                    .Append(transform
-                        .DOMove(movePos, model.coolDown / 2f)
-                        .SetEase(Ease.InCirc))
-                    .InsertCallback(model.coolDown, () => model.isAttacking = false);
+                
             }
+
+            return result;
         }
     }
 }
