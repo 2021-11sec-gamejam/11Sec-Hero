@@ -1,5 +1,6 @@
 using Player;
 using UnityEngine;
+using Weapon;
 
 namespace Player
 {
@@ -9,14 +10,21 @@ namespace Player
         public float speed = 1f;
 
         private SpriteRenderer _spriteRenderer;
+        private Vector2 _deltaPosition;
+
+        public float MovedDistance { get; set; } = 0f;
 
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            _deltaPosition = transform.position;
         }
 
         private void Update()
         {
+            MovedDistance += Vector2.Distance(_deltaPosition, transform.position);
+            _deltaPosition = transform.position;
+            
             switch (model.state)
             {
                 case PlayerModel.PlayerState.Idle:
@@ -30,6 +38,7 @@ namespace Player
                         }
                         model.state = PlayerModel.PlayerState.Walk;
                     }
+                    GetPickupInput();
                     GetAttackInput();
                     break;
                 case PlayerModel.PlayerState.Walk:
@@ -46,6 +55,7 @@ namespace Player
                     {
                         model.state = PlayerModel.PlayerState.Idle;
                     }
+                    GetPickupInput();
                     GetAttackInput();
                     break;
                 case PlayerModel.PlayerState.Attack:
@@ -75,6 +85,19 @@ namespace Player
             if (Input.GetMouseButtonDown(1))
             {
                 model.weapon.Attack();
+            }
+        }
+
+        private void GetPickupInput()
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Physics2D.OverlapCircle(transform.position, 1.5f).TryGetComponent(out ItemObject item);
+                if (item)
+                {
+                    model.ChangeWeapon(item.model);
+                    Destroy(item.gameObject);
+                }
             }
         }
     }
