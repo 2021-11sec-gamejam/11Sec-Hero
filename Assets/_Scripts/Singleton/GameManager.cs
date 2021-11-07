@@ -13,5 +13,10 @@ namespace Singleton
             base.OnAwake();
             player ??= Instantiate(Resources.Load<GameObject>("Player"), Vector3.zero, Quaternion.identity).GetComponent<PlayerModel>();
         }
+
+        public void GameOver()
+        {
+            Time.timeScale = 0;
+        }
     }
 }
