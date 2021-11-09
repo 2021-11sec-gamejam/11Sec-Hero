@@ -13,12 +13,13 @@ public class Enemy : MonoBehaviour
     
     public float HP;
     public float AttackValue;
+    private bool _isDead;
     private static readonly int IsDie = Animator.StringToHash("isDie");
     private static readonly int Direction = Animator.StringToHash("Direction");
 
     private void Start()
     {
-        player ??= GameManager.Instance.player;
+        player = GameManager.Instance.player;
         animator = GetComponent<Animator>();
         speed = 1f;
     }
@@ -42,8 +43,9 @@ public class Enemy : MonoBehaviour
     public virtual void ReceiveDamage(float damage)
     {
         HP -= damage;
-        if (HP <= 0)
+        if (HP <= 0 && !_isDead)
         {
+            _isDead = true;
             // Die method... TODO.
             animator.SetBool(IsDie, true);
             StartCoroutine(Dead());
@@ -52,6 +54,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator Dead()
     {
+        GameManager.Instance.player.RemainTime = 11f;
         yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
     }

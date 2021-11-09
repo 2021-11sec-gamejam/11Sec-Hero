@@ -1,7 +1,10 @@
 ﻿using System;
+using DG.Tweening;
 using Factory;
 using Player;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Weapon;
 using CharacterController = Player.CharacterController;
 using Random = UnityEngine.Random;
@@ -18,6 +21,8 @@ namespace Singleton
         private CharacterController _characterController;
         private int _canGetWeaponRarity = 0;
         public Camera MainCamera;
+        public TMP_Text timeText;
+        public TMP_Text gameOverText;
 
         protected override void OnAwake()
         {
@@ -53,12 +58,20 @@ namespace Singleton
                 Time.timeScale = _isPaused ? 1 : 0;
                 _isPaused = !_isPaused;
             }
+
+            if (Input.GetKeyDown(KeyCode.R) && player.RemainTime <= 0f)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
 
         public void GameOver()
         {
             //Time.timeScale = 0;
             Debug.Log("으앙쥬금");
+            gameOverText.gameObject.SetActive(true);
+            gameOverText.DOFade(0f, 0f);
+            gameOverText.DOFade(1f, 1f);
         }
     }
 }

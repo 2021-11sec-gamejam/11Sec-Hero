@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Factory;
 using Singleton;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace Player
         public float RemainTime
         {
             get => _remainTime;
-            set => _remainTime = value + _remainTime > 11f ? 11f : value;
+            set => _remainTime = value > 11f ? 11f : value;
         }
 
         public Weapon weapon;
@@ -30,6 +31,7 @@ namespace Player
 
         private float _remainTime;
         private static readonly int Die = Animator.StringToHash("Die");
+        public bool isInvincibility;
 
         public void Awake()
         {
@@ -50,6 +52,8 @@ namespace Player
                     GameManager.Instance.GameOver();
                 }
             }
+
+            GameManager.Instance.timeText.text = $"남은 시간 : {_remainTime:F1}초";
         }
 
         public void ChangeWeapon(Weapon.WeaponModel model)
@@ -65,6 +69,22 @@ namespace Player
             weapon.model = model;
             animator.runtimeAnimatorController =
                 Resources.Load<AnimatorOverrideController>($"Animator/{model.weaponName}");
+        }
+
+        public void ReceiveDamage(float damage)
+        {
+            if (!isInvincibility)
+            {
+                _remainTime -= damage;
+                StartCoroutine(ResetInvincibility());
+            }
+        }
+
+        private IEnumerator ResetInvincibility()
+        {
+            isInvincibility = true;
+            yield return new WaitForSeconds(1.5f);
+            isInvincibility = false;
         }
     }
 }

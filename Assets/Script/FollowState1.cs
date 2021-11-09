@@ -18,7 +18,7 @@ public class FollowState1 : StateMachineBehaviour
         if (Vector2.Distance(Enemy.player.transform.position, enemyTransform.position) < 1f)
         {
             animator.SetTrigger("Attack");
-            Enemy.player.RemainTime -= enemy.AttackValue;
+            Enemy.player.ReceiveDamage(enemy.AttackValue);
         }
         else
         {

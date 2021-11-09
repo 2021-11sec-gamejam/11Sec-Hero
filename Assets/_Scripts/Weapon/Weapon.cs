@@ -60,7 +60,7 @@ namespace Weapon
 
         protected virtual void Awake()
         {
-            MainCam ??= Camera.main;
+            MainCam = Camera.main;
         }
 
         protected virtual void Update()
